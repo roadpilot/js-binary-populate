@@ -10,4 +10,28 @@ struct Node {
 }
 Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
 
-Initially, all next pointers are set to NULL.*/
+Initially, all next pointers are set to NULL.
+*/
+
+/**
+ * // Definition for a Node.
+ * function Node(val, left, right, next) {
+ *    this.val = val === undefined ? null : val;
+ *    this.left = left === undefined ? null : left;
+ *    this.right = right === undefined ? null : right;
+ *    this.next = next === undefined ? null : next;
+ * };
+ */
+
+/**
+ * @param {Node} root
+ * @return {Node}
+ */
+var connect = function(root) {
+    if (root === null || root.right === null) return root
+    root.left.next = root.right
+    root.right.next = root.next ? root.left.next : null
+    connect(root.left)    
+    connect(root.right)
+    return root
+};
